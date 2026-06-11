@@ -7,70 +7,79 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f6fa;color:#222;min-height:100vh}
-header{background:#1a3a5c;color:#fff;padding:0}
+header{background:#1a3a5c}
 .header-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
-.header-title{font-size:16px;font-weight:600;letter-spacing:.3px}
+.header-title{font-size:16px;font-weight:600;color:#fff}
 .header-sub{font-size:12px;color:#bdd5ee;margin-top:2px}
-.header-right{display:flex;gap:8px;align-items:center}
+.save-indicator{font-size:11px;color:#fff;opacity:.7}
 .main{max-width:900px;margin:0 auto;padding:20px}
 .banner{background:#e8f0f7;border-left:3px solid #2e6da4;border-radius:6px;padding:10px 14px;margin-bottom:18px;font-size:13px;color:#0c447c;display:flex;align-items:center;gap:8px}
 .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
 .topbar-title{font-size:18px;font-weight:600;color:#1a3a5c}
 .section-card{background:#fff;border:1px solid #e0e4ec;border-radius:10px;margin-bottom:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-.sec-header{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#f8f9fc;cursor:pointer;user-select:none;border-bottom:1px solid transparent;transition:background .15s}
+.sec-header{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#f8f9fc;cursor:pointer;user-select:none;transition:background .15s}
 .sec-header:hover{background:#eef2f8}
-.sec-header.open{border-bottom-color:#e0e4ec}
+.sec-header.open{border-bottom:1px solid #e0e4ec}
 .sec-num{width:30px;height:30px;border-radius:50%;background:#2e6da4;color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.sec-title-input{flex:1;font-size:14px;font-weight:600;border:none;background:transparent;color:#1a3a5c;outline:none;cursor:text}
+.sec-title-input{flex:1;font-size:14px;font-weight:600;border:none;background:transparent;color:#1a3a5c;outline:none}
 .sec-title-input:focus{background:#fff;border-radius:4px;padding:2px 6px}
 .sec-actions{display:flex;gap:5px}
 .btn{border:1px solid #dde1ea;background:#fff;border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;color:#444;transition:background .15s}
 .btn:hover{background:#f0f2f7}
 .btn.primary{background:#1a3a5c;color:#fff;border-color:#1a3a5c}
-.btn.primary:hover{background:#2e6da4;border-color:#2e6da4}
+.btn.primary:hover{background:#2e6da4}
 .btn.danger{color:#c0392b;border-color:#f5c6c2}
 .btn.danger:hover{background:#fdecea}
 .btn.sm{padding:3px 8px;font-size:11px}
 .sec-body{padding:14px 16px}
 .sec-desc{background:#f8f9fc;border-left:2px solid #b5d4f4;border-radius:4px;padding:6px 10px;margin-bottom:12px}
 .sec-desc textarea{width:100%;font-size:12px;color:#666;font-style:italic;border:none;background:transparent;outline:none;resize:none;font-family:inherit;line-height:1.5}
-.notions-list{margin-bottom:10px}
-.notion-row{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid #f0f2f7}
-.notion-row:last-child{border-bottom:none}
+
+/* ── NOTION ── */
+.notion-block{margin-bottom:6px}
+.notion-row{display:flex;align-items:flex-start;gap:8px;padding:6px 8px;border-radius:6px;transition:background .15s;border:1px solid transparent}
+.notion-row:hover{background:#f8f9fc;border-color:#eef0f5}
 .notion-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:7px;transition:background .2s}
 .notion-dot.normal{background:#2e6da4}
 .notion-dot.todo{background:#e6ac00}
 .notion-textarea{flex:1;font-size:13px;border:none;background:transparent;outline:none;resize:none;font-family:inherit;line-height:1.5;min-height:20px;color:#222}
 .notion-textarea.todo{color:#795500;font-style:italic}
-.notion-del{opacity:0;transition:opacity .15s;border:none;background:none;cursor:pointer;color:#c0392b;font-size:13px;padding:2px 4px}
-.notion-row:hover .notion-del{opacity:1}
-.add-notion-btn{font-size:12px;color:#888;border:none;background:none;cursor:pointer;padding:4px 0;display:flex;align-items:center;gap:4px;margin-top:2px}
-.add-notion-btn:hover{color:#1a3a5c}
-.divider{border:none;border-top:1px solid #eef0f5;margin:12px 0}
-.attach-label{font-size:12px;font-weight:600;color:#888;margin-bottom:8px;display:flex;align-items:center;gap:5px}
-.drop-zone{border:1.5px dashed #c5cfe0;border-radius:8px;padding:12px;text-align:center;cursor:pointer;transition:background .15s,border-color .15s}
-.drop-zone:hover,.drop-zone.over{background:#e8f0f7;border-color:#2e6da4}
-.drop-label{font-size:12px;color:#888}
-.file-list{margin-top:6px;display:flex;flex-direction:column;gap:4px}
-.file-item{display:flex;align-items:center;gap:8px;padding:6px 10px;background:#f8f9fc;border:1px solid #e8eaf0;border-radius:6px}
-.file-icon{font-size:16px;flex-shrink:0}
-.file-name{flex:1;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#333}
-.file-size{font-size:11px;color:#888;flex-shrink:0}
-.file-del{opacity:0;border:none;background:none;cursor:pointer;color:#c0392b;font-size:12px;transition:opacity .15s}
-.file-item:hover .file-del{opacity:1}
-.link-row{display:flex;gap:6px;margin-top:6px}
-.link-input{flex:1;font-size:12px;padding:6px 10px;border:1px solid #dde1ea;border-radius:6px;background:#f8f9fc;color:#222;outline:none;font-family:inherit}
-.link-input:focus{border-color:#2e6da4;background:#fff}
-.link-item{display:flex;align-items:center;gap:8px;padding:6px 10px;background:#f8f9fc;border:1px solid #e8eaf0;border-radius:6px;margin-top:4px}
-.link-item a{flex:1;font-size:12px;color:#2e6da4;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.link-item a:hover{text-decoration:underline}
-.link-del{opacity:0;border:none;background:none;cursor:pointer;color:#c0392b;font-size:12px;transition:opacity .15s}
-.link-item:hover .link-del{opacity:1}
-.status-bar{text-align:center;font-size:12px;color:#888;margin-top:16px;min-height:18px}
-.loading{text-align:center;padding:3rem;color:#888;font-size:14px}
+.notion-row-actions{display:flex;gap:4px;flex-shrink:0;opacity:0;transition:opacity .15s;align-items:center}
+.notion-row:hover .notion-row-actions{opacity:1}
+.notion-action-btn{border:none;background:none;cursor:pointer;font-size:14px;padding:2px 4px;border-radius:4px;color:#888;transition:background .15s}
+.notion-action-btn:hover{background:#e8f0f7;color:#2e6da4}
+.notion-action-btn.danger:hover{background:#fdecea;color:#c0392b}
+
+/* ── ATTACHMENTS sur une notion ── */
+.notion-attachments{margin-left:22px;margin-top:4px;margin-bottom:4px;display:flex;flex-wrap:wrap;gap:6px}
+.attach-chip{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;background:#f0f5fc;border:1px solid #c5d8f0;border-radius:20px;font-size:11px;color:#1a3a5c;max-width:220px}
+.attach-chip span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+.attach-chip a{color:#2e6da4;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+.attach-chip a:hover{text-decoration:underline}
+.attach-chip-del{border:none;background:none;cursor:pointer;color:#888;font-size:12px;padding:0 0 0 2px;flex-shrink:0}
+.attach-chip-del:hover{color:#c0392b}
+
+/* ── INLINE ATTACH PANEL ── */
+.attach-panel{margin-left:22px;margin-top:4px;margin-bottom:6px;background:#f8f9fc;border:1px dashed #c5cfe0;border-radius:8px;padding:10px 12px;display:none}
+.attach-panel.open{display:block}
+.attach-panel-row{display:flex;gap:6px;margin-bottom:6px}
+.attach-link-input{flex:1;font-size:12px;padding:5px 8px;border:1px solid #dde1ea;border-radius:6px;background:#fff;color:#222;outline:none;font-family:inherit}
+.attach-link-input:focus{border-color:#2e6da4}
+.attach-drop{border:1.5px dashed #c5cfe0;border-radius:6px;padding:8px;text-align:center;cursor:pointer;font-size:12px;color:#888;transition:background .15s}
+.attach-drop:hover,.attach-drop.over{background:#e8f0f7;border-color:#2e6da4}
+
+.add-notion-btn{font-size:12px;color:#888;border:none;background:none;cursor:pointer;padding:4px 8px;display:flex;align-items:center;gap:4px;margin-top:4px;border-radius:6px}
+.add-notion-btn:hover{background:#f0f5fc;color:#1a3a5c}
 .add-section-btn{width:100%;padding:10px;border:1.5px dashed #c5cfe0;background:transparent;border-radius:10px;font-size:13px;color:#888;cursor:pointer;transition:all .15s;margin-bottom:12px}
 .add-section-btn:hover{border-color:#2e6da4;color:#2e6da4;background:#f0f5fc}
-.save-indicator{font-size:11px;color:#fff;opacity:.7}
+.status-bar{text-align:center;font-size:12px;color:#888;margin-top:16px;min-height:18px}
+.loading{text-align:center;padding:3rem;color:#888;font-size:14px}
+
+/* ── IMAGE PREVIEW ── */
+.img-preview{width:100%;max-width:300px;border-radius:6px;margin-top:4px;border:1px solid #e0e4ec;cursor:zoom-in}
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);z-index:1000;align-items:center;justify-content:center;cursor:zoom-out}
+.modal-overlay.open{display:flex}
+.modal-img{max-width:90vw;max-height:90vh;border-radius:8px}
 </style>
 </head>
 <body>
@@ -81,26 +90,27 @@ header{background:#1a3a5c;color:#fff;padding:0}
       <div class="header-title">Codex Interne — Hébergement ESMS</div>
       <div class="header-sub">Comptabilité ASE — Conseil Départemental de Seine-Saint-Denis (93)</div>
     </div>
-    <div class="header-right">
+    <div style="display:flex;gap:8px;align-items:center">
       <span class="save-indicator" id="saveIndicator"></span>
       <button class="btn primary" onclick="saveAll()">💾 Sauvegarder</button>
     </div>
   </div>
 </header>
 
+<!-- Modal image -->
+<div class="modal-overlay" id="imgModal" onclick="this.classList.remove('open')">
+  <img class="modal-img" id="modalImg" src="" alt="Aperçu"/>
+</div>
+
 <div class="main">
   <div class="banner">
     📢 Outil partagé — toutes les modifications sont visibles par tous les utilisateurs.
   </div>
-
   <div class="topbar">
     <div class="topbar-title">Sections du Codex</div>
   </div>
-
   <div id="sections-root"><div class="loading">⏳ Chargement...</div></div>
-
   <button class="add-section-btn" onclick="addSection()">+ Ajouter une section</button>
-
   <div class="status-bar" id="statusBar"></div>
 </div>
 
@@ -108,324 +118,260 @@ header{background:#1a3a5c;color:#fff;padding:0}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-// ── CONFIG FIREBASE ────────────────────────────────────────────────
-const firebaseConfig = {
-  databaseURL: "https://codex-ase93-default-rtdb.europe-west1.firebasedatabase.app"
-};
-
+const firebaseConfig = { databaseURL: "https://codex-ase93-default-rtdb.europe-west1.firebasedatabase.app" };
 const app = initializeApp(firebaseConfig);
 const db  = getDatabase(app);
 const dbRef = ref(db, "codex");
 
-// ── DONNÉES PAR DÉFAUT ─────────────────────────────────────────────
 const DEFAULT = {
-  sections: [
-    { id:1, title:"Procédure de traitement d'une facture", desc:"Vérification encodage > période PEC > saisie IODAS > date effet > paiement", open:true,
-      notions:[
-        {id:1,text:"Vérifier que l'encodage est présent et complet dans IODAS"},
-        {id:2,text:"Contrôler la cohérence entre la période facturée et la PEC"},
-        {id:3,text:"Saisir sur IODAS après validation des vérifications"},
-        {id:4,text:"Appliquer la date d'effet de paiement [À compléter avec le service]"},
-        {id:5,text:"Procéder au paiement [À compléter avec le service]"},
-      ], files:[], links:[] },
-    { id:2, title:"Problèmes fréquents & comment les résoudre", desc:"Encodage manquant, période non conforme, RIB erroné, problème date effet paiement...", open:true,
-      notions:[
-        {id:1,text:"Encodage absent ou incomplet : relancer le groupement (section 03)"},
-        {id:2,text:"Période facture ≠ PEC : retourner au groupement pour correction"},
-        {id:3,text:"RIB non à jour : demander RIB à jour + transmettre au service RIB"},
-        {id:4,text:"Problème de date d'effet paiement : [À compléter avec le service]"},
-        {id:5,text:"Mauvais interlocuteur contacté : consulter la section 05"},
-      ], files:[], links:[] },
-    { id:3, title:"Procédure de relance groupement", desc:"À étoffer avec l'outil de suivi — à définir avec le service", open:true,
-      notions:[
-        {id:1,text:"Identifier la facture bloquée : établissement, dossier ASE, période, motif"},
-        {id:2,text:"1ère relance par email au référent du groupement"},
-        {id:3,text:"Reporter dans l'outil de suivi des relances [outil à créer]"},
-        {id:4,text:"2ème relance si pas de réponse [délai à définir] — responsable en copie"},
-        {id:5,text:"Définir avec le service : pilotage interne ou délégation groupement [À trancher]"},
-      ], files:[], links:[] },
-    { id:4, title:"Glossaire", desc:"Termes et définitions — section évolutive, facile à mettre à jour", open:true,
-      notions:[
-        {id:1,text:"Encodage : saisie informatique des lignes de facturation dans IODAS par le groupement"},
-        {id:2,text:"PEC (Prise en charge) : document ASE autorisant le placement d'un enfant"},
-        {id:3,text:"Groupement : structure regroupant plusieurs établissements saisissant les encodages"},
-        {id:4,text:"ESMS : Établissement ou Service Médico-Social"},
-        {id:5,text:"RIB : Relevé d'Identité Bancaire du prestataire"},
-        {id:6,text:"IODAS : logiciel de gestion ASE pour les dossiers et la facturation"},
-        {id:7,text:"Date d'effet : [À définir avec le service]"},
-        {id:8,text:"Mandatement : [À définir avec le service]"},
-      ], files:[], links:[] },
-    { id:5, title:"Contacts & documents utiles", desc:"Fichiers Excel, tableaux de bord, PDF de référence, contacts référents", open:true,
-      notions:[
-        {id:1,text:"Gestionnaire comptable : [email] | Permanence : [numéro à renseigner]"},
-        {id:2,text:"Groupements — référents par établissement : [liste à renseigner]"},
-        {id:3,text:"Responsable comptabilité hébergement : [email à renseigner]"},
-        {id:4,text:"Service RIB (mise à jour) : [email / contact à renseigner]"},
-        {id:5,text:"Tableau de bord suivi factures : [lien SharePoint à coller]"},
-        {id:6,text:"Outil suivi relances : [lien à renseigner quand créé]"},
-      ], files:[], links:[] },
+  sections:[
+    {id:1,title:"Procédure de traitement d'une facture",desc:"Vérification encodage > période PEC > saisie IODAS > date effet > paiement",open:true,
+     notions:[
+      {id:1,text:"Vérifier que l'encodage est présent et complet dans IODAS",attachments:[]},
+      {id:2,text:"Contrôler la cohérence entre la période facturée et la PEC",attachments:[]},
+      {id:3,text:"Saisir sur IODAS après validation des vérifications",attachments:[]},
+      {id:4,text:"Appliquer la date d'effet de paiement [À compléter avec le service]",attachments:[]},
+      {id:5,text:"Procéder au paiement [À compléter avec le service]",attachments:[]},
+    ]},
+    {id:2,title:"Problèmes fréquents & comment les résoudre",desc:"Encodage manquant, période non conforme, RIB erroné...",open:true,
+     notions:[
+      {id:1,text:"Encodage absent ou incomplet : relancer le groupement (section 03)",attachments:[]},
+      {id:2,text:"Période facture ≠ PEC : retourner au groupement pour correction",attachments:[]},
+      {id:3,text:"RIB non à jour : demander RIB à jour + transmettre au service RIB",attachments:[]},
+      {id:4,text:"Problème de date d'effet paiement : [À compléter avec le service]",attachments:[]},
+      {id:5,text:"Mauvais interlocuteur contacté : consulter la section 05",attachments:[]},
+    ]},
+    {id:3,title:"Procédure de relance groupement",desc:"À étoffer avec l'outil de suivi — à définir avec le service",open:true,
+     notions:[
+      {id:1,text:"Identifier la facture bloquée : établissement, dossier ASE, période, motif",attachments:[]},
+      {id:2,text:"1ère relance par email au référent du groupement",attachments:[]},
+      {id:3,text:"Reporter dans l'outil de suivi des relances [outil à créer]",attachments:[]},
+      {id:4,text:"2ème relance si pas de réponse [délai à définir] — responsable en copie",attachments:[]},
+      {id:5,text:"Définir avec le service : pilotage interne ou délégation [À trancher]",attachments:[]},
+    ]},
+    {id:4,title:"Glossaire",desc:"Termes et définitions — section évolutive",open:true,
+     notions:[
+      {id:1,text:"Encodage : saisie informatique des lignes de facturation dans IODAS",attachments:[]},
+      {id:2,text:"PEC (Prise en charge) : document ASE autorisant le placement d'un enfant",attachments:[]},
+      {id:3,text:"Groupement : structure regroupant plusieurs établissements",attachments:[]},
+      {id:4,text:"ESMS : Établissement ou Service Médico-Social",attachments:[]},
+      {id:5,text:"RIB : Relevé d'Identité Bancaire du prestataire",attachments:[]},
+      {id:6,text:"IODAS : logiciel de gestion ASE pour les dossiers et la facturation",attachments:[]},
+      {id:7,text:"Date d'effet : [À définir avec le service]",attachments:[]},
+      {id:8,text:"Mandatement : [À définir avec le service]",attachments:[]},
+    ]},
+    {id:5,title:"Contacts & documents utiles",desc:"Fichiers Excel, tableaux de bord, PDF de référence",open:true,
+     notions:[
+      {id:1,text:"Gestionnaire comptable : [email] | Permanence : [numéro]",attachments:[]},
+      {id:2,text:"Groupements — référents par établissement : [liste]",attachments:[]},
+      {id:3,text:"Responsable comptabilité hébergement : [email]",attachments:[]},
+      {id:4,text:"Service RIB (mise à jour) : [email / contact]",attachments:[]},
+      {id:5,text:"Tableau de bord suivi factures : [lien SharePoint]",attachments:[]},
+      {id:6,text:"Outil suivi relances : [lien à renseigner]",attachments:[]},
+    ]},
   ],
-  nsi: 6, nni: 200
+  nsi:6, nni:200
 };
 
-// ── STATE ──────────────────────────────────────────────────────────
 let state = null;
-let saving = false;
-const linkInputs = {};
+let openPanels = {};
 
-function isACompleter(text) {
-  return /\[À (compléter|définir|trancher)|outil à créer|délai à définir|liste à|lien (Share|à)|email|numéro à/i.test(text);
-}
+function isAC(t){ return /\[À (compléter|définir|trancher)|outil à créer|délai à définir|liste|lien|email|numéro/i.test(t); }
+function iconFor(n){ const e=(n||"").split(".").pop().toLowerCase(); if(["xlsx","xls","csv"].includes(e))return"📊"; if(e==="pdf")return"📄"; if(["docx","doc"].includes(e))return"📝"; if(["png","jpg","jpeg","gif","webp"].includes(e))return"🖼️"; return"📎"; }
+function isImg(n){ return /\.(png|jpg|jpeg|gif|webp)$/i.test(n||""); }
+function fmtSize(b){ if(!b)return""; if(b<1024)return b+"B"; if(b<1048576)return Math.round(b/1024)+"KB"; return(b/1048576).toFixed(1)+"MB"; }
+function numStr(i){ return String(i+1).padStart(2,"0"); }
+function setStatus(m,d=2500){ const e=document.getElementById("statusBar"); e.textContent=m; if(d)setTimeout(()=>{if(e.textContent===m)e.textContent="";},d); }
+function mkBtn(label,cls,fn,title){ const b=document.createElement("button"); b.className="btn "+(cls||""); b.textContent=label; if(title)b.title=title; b.onclick=fn; return b; }
 
-function iconFor(name) {
-  const e = (name||"").split(".").pop().toLowerCase();
-  if(["xlsx","xls","csv"].includes(e)) return "📊";
-  if(e==="pdf") return "📄";
-  if(["docx","doc"].includes(e)) return "📝";
-  if(["png","jpg","jpeg","gif"].includes(e)) return "🖼️";
-  return "📎";
-}
-
-function fmtSize(b) {
-  if(!b) return "";
-  if(b<1024) return b+"B";
-  if(b<1048576) return Math.round(b/1024)+"KB";
-  return (b/1048576).toFixed(1)+"MB";
-}
-
-function numStr(i) { return String(i+1).padStart(2,"0"); }
-
-function setStatus(msg, dur=2500) {
-  const el = document.getElementById("statusBar");
-  el.textContent = msg;
-  if(dur) setTimeout(()=>{ if(el.textContent===msg) el.textContent=""; }, dur);
-}
-
-// ── FIREBASE ───────────────────────────────────────────────────────
 onValue(dbRef, snap => {
   const val = snap.val();
-  state = val || JSON.parse(JSON.stringify(DEFAULT));
+  state = val ? migrateState(val) : JSON.parse(JSON.stringify(DEFAULT));
   render();
 });
 
-window.saveAll = async function() {
-  if(!state || saving) return;
-  saving = true;
-  document.getElementById("saveIndicator").textContent = "Sauvegarde...";
-  try {
-    await set(dbRef, state);
-    document.getElementById("saveIndicator").textContent = "✓ Sauvegardé";
-    setTimeout(()=>{ document.getElementById("saveIndicator").textContent=""; }, 2000);
-  } catch(e) {
-    setStatus("Erreur : "+e.message);
-  }
-  saving = false;
-};
-
-function autoSave() {
-  if(!state) return;
-  set(dbRef, state).catch(()=>{});
+function migrateState(s) {
+  if(s.sections) s.sections.forEach(sec => {
+    if(sec.notions) sec.notions.forEach(n => { if(!n.attachments) n.attachments=[]; });
+  });
+  return s;
 }
 
-// ── RENDER ─────────────────────────────────────────────────────────
-function render() {
-  const root = document.getElementById("sections-root");
+window.saveAll = async function(){
+  document.getElementById("saveIndicator").textContent="Sauvegarde...";
+  try{ await set(dbRef,state); document.getElementById("saveIndicator").textContent="✓ Sauvegardé"; setTimeout(()=>{document.getElementById("saveIndicator").textContent="";},2000); }
+  catch(e){ setStatus("Erreur : "+e.message); }
+};
+
+function autoSave(){ if(state) set(dbRef,state).catch(()=>{}); }
+
+function render(){
+  const root=document.getElementById("sections-root");
   if(!state){ root.innerHTML='<div class="loading">⏳ Chargement...</div>'; return; }
-  root.innerHTML = "";
+  root.innerHTML="";
 
-  state.sections.forEach((sec, si) => {
-    if(!sec.files) sec.files=[];
-    if(!sec.links) sec.links=[];
-
-    const card = document.createElement("div");
-    card.className = "section-card";
+  state.sections.forEach((sec,si)=>{
+    const card=document.createElement("div"); card.className="section-card";
 
     // HEADER
-    const head = document.createElement("div");
-    head.className = "sec-header" + (sec.open?" open":"");
-
-    const num = document.createElement("div");
-    num.className = "sec-num";
-    num.textContent = numStr(si);
-
-    const ti = document.createElement("input");
-    ti.className = "sec-title-input";
-    ti.value = sec.title;
-    ti.setAttribute("aria-label","Titre section");
-    ti.onclick = e => e.stopPropagation();
-    ti.oninput = e => { sec.title = e.target.value; };
-    ti.onblur = () => autoSave();
-
-    const acts = document.createElement("div");
-    acts.className = "sec-actions";
-    acts.onclick = e => e.stopPropagation();
-
-    if(si>0){ const b=mkBtn("↑","sm",()=>{ state.sections.splice(si,1);state.sections.splice(si-1,0,sec);autoSave();render(); },"Monter"); acts.appendChild(b); }
-    if(si<state.sections.length-1){ const b=mkBtn("↓","sm",()=>{ state.sections.splice(si,1);state.sections.splice(si+1,0,sec);autoSave();render(); },"Descendre"); acts.appendChild(b); }
-    const db=mkBtn("✕","sm danger",()=>{ if(confirm("Supprimer cette section ?")){ state.sections.splice(si,1);autoSave();render(); } },"Supprimer");
-    acts.appendChild(db);
-    const tog=mkBtn(sec.open?"▾":"▸","sm",()=>{ sec.open=!sec.open;render(); },sec.open?"Replier":"Déplier");
-    acts.appendChild(tog);
-
+    const head=document.createElement("div");
+    head.className="sec-header"+(sec.open?" open":"");
+    const num=document.createElement("div"); num.className="sec-num"; num.textContent=numStr(si);
+    const ti=document.createElement("input"); ti.className="sec-title-input"; ti.value=sec.title;
+    ti.onclick=e=>e.stopPropagation();
+    ti.oninput=e=>{sec.title=e.target.value;};
+    ti.onblur=()=>autoSave();
+    const acts=document.createElement("div"); acts.className="sec-actions"; acts.onclick=e=>e.stopPropagation();
+    if(si>0) acts.appendChild(mkBtn("↑","sm",()=>{state.sections.splice(si,1);state.sections.splice(si-1,0,sec);autoSave();render();},"Monter"));
+    if(si<state.sections.length-1) acts.appendChild(mkBtn("↓","sm",()=>{state.sections.splice(si,1);state.sections.splice(si+1,0,sec);autoSave();render();},"Descendre"));
+    acts.appendChild(mkBtn("✕","sm danger",()=>{if(confirm("Supprimer cette section ?")){ state.sections.splice(si,1);autoSave();render();}},));
+    acts.appendChild(mkBtn(sec.open?"▾":"▸","sm",()=>{sec.open=!sec.open;render();}));
     head.appendChild(num); head.appendChild(ti); head.appendChild(acts);
-    head.onclick = () => { sec.open=!sec.open; render(); };
+    head.onclick=()=>{sec.open=!sec.open;render();};
     card.appendChild(head);
 
-    if(sec.open) {
-      const body = document.createElement("div");
-      body.className = "sec-body";
+    if(sec.open){
+      const body=document.createElement("div"); body.className="sec-body";
 
-      // Description
-      const descBox = document.createElement("div");
-      descBox.className = "sec-desc";
-      const descTA = document.createElement("textarea");
-      descTA.value = sec.desc||"";
-      descTA.rows = 1;
-      descTA.placeholder = "Sous-titre / description...";
-      descTA.setAttribute("aria-label","Description");
-      descTA.oninput = e => { sec.desc=e.target.value; autoGrow(e.target); };
-      descTA.onblur = () => autoSave();
-      descBox.appendChild(descTA);
-      body.appendChild(descBox);
+      // DESC
+      const db=document.createElement("div"); db.className="sec-desc";
+      const dt=document.createElement("textarea"); dt.value=sec.desc||""; dt.rows=1; dt.placeholder="Sous-titre...";
+      dt.oninput=e=>{sec.desc=e.target.value;grow(e.target);}; dt.onblur=()=>autoSave();
+      db.appendChild(dt); body.appendChild(db);
 
-      // Notions
-      const nl = document.createElement("div");
-      nl.className = "notions-list";
+      // NOTIONS
       (sec.notions||[]).forEach((n,ni)=>{
-        const row = document.createElement("div");
-        row.className = "notion-row";
-        const dot = document.createElement("div");
-        dot.className = "notion-dot " + (isACompleter(n.text)?"todo":"normal");
-        const ta = document.createElement("textarea");
-        ta.className = "notion-textarea" + (isACompleter(n.text)?" todo":"");
-        ta.value = n.text; ta.rows=1;
-        ta.setAttribute("aria-label","Notion");
-        ta.oninput = e => { n.text=e.target.value; dot.className="notion-dot "+(isACompleter(n.text)?"todo":"normal"); ta.className="notion-textarea"+(isACompleter(n.text)?" todo":""); autoGrow(e.target); };
-        ta.onblur = () => autoSave();
-        const del = document.createElement("button");
-        del.className = "notion-del";
-        del.textContent = "✕";
-        del.setAttribute("aria-label","Supprimer notion");
-        del.onclick = ()=>{ sec.notions.splice(ni,1); autoSave(); render(); };
-        row.appendChild(dot); row.appendChild(ta); row.appendChild(del);
-        nl.appendChild(row);
-      });
-      body.appendChild(nl);
+        if(!n.attachments) n.attachments=[];
+        const panelKey = `${sec.id}-${n.id}`;
+        const block=document.createElement("div"); block.className="notion-block";
 
-      const addN = document.createElement("button");
-      addN.className = "add-notion-btn";
-      addN.innerHTML = "+ Ajouter une notion";
-      addN.onclick = ()=>{ sec.notions.push({id:state.nni++,text:""}); autoSave(); render(); setTimeout(()=>{ const tas=nl.querySelectorAll("textarea"); if(tas.length) tas[tas.length-1].focus(); },50); };
+        // Ligne notion
+        const row=document.createElement("div"); row.className="notion-row";
+        const dot=document.createElement("div"); dot.className="notion-dot "+(isAC(n.text)?"todo":"normal");
+        const ta=document.createElement("textarea"); ta.className="notion-textarea"+(isAC(n.text)?" todo":"");
+        ta.value=n.text; ta.rows=1;
+        ta.oninput=e=>{n.text=e.target.value; dot.className="notion-dot "+(isAC(n.text)?"todo":"normal"); ta.className="notion-textarea"+(isAC(n.text)?" todo":""); grow(e.target);};
+        ta.onblur=()=>autoSave();
+
+        // Actions notion
+        const ra=document.createElement("div"); ra.className="notion-row-actions";
+        
+        // Bouton attacher
+        const attachBtn=document.createElement("button"); attachBtn.className="notion-action-btn"; attachBtn.title="Attacher un fichier ou lien"; attachBtn.textContent="📎";
+        attachBtn.onclick=()=>{
+          openPanels[panelKey]=!openPanels[panelKey];
+          const panel=block.querySelector(".attach-panel");
+          if(panel) panel.classList.toggle("open", openPanels[panelKey]);
+        };
+        
+        // Bouton supprimer
+        const delBtn=document.createElement("button"); delBtn.className="notion-action-btn danger"; delBtn.title="Supprimer"; delBtn.textContent="✕";
+        delBtn.onclick=()=>{sec.notions.splice(ni,1);autoSave();render();};
+
+        ra.appendChild(attachBtn); ra.appendChild(delBtn);
+        row.appendChild(dot); row.appendChild(ta); row.appendChild(ra);
+        block.appendChild(row);
+
+        // Chips attachements existants
+        if(n.attachments.length>0){
+          const chips=document.createElement("div"); chips.className="notion-attachments";
+          n.attachments.forEach((att,ai)=>{
+            const chip=document.createElement("div"); chip.className="attach-chip";
+            const ico=document.createElement("span"); ico.textContent=att.type==="link"?"🔗":iconFor(att.name);
+            
+            if(att.type==="link"){
+              const a=document.createElement("a"); a.href=att.url; a.target="_blank"; a.rel="noopener"; a.textContent=att.label||att.url;
+              chip.appendChild(ico); chip.appendChild(a);
+            } else if(att.type==="image" && att.dataUrl){
+              const a=document.createElement("a"); a.href="#"; a.textContent=att.name;
+              a.onclick=e=>{e.preventDefault(); document.getElementById("modalImg").src=att.dataUrl; document.getElementById("imgModal").classList.add("open");};
+              chip.appendChild(ico); chip.appendChild(a);
+            } else {
+              const s=document.createElement("span"); s.textContent=att.name+(att.size?" ("+fmtSize(att.size)+")":"");
+              chip.appendChild(ico); chip.appendChild(s);
+            }
+
+            const d=document.createElement("button"); d.className="attach-chip-del"; d.textContent="×"; d.title="Supprimer";
+            d.onclick=()=>{n.attachments.splice(ai,1);autoSave();render();};
+            chip.appendChild(d);
+            chips.appendChild(chip);
+          });
+          block.appendChild(chips);
+
+          // Aperçu images
+          n.attachments.filter(a=>a.type==="image"&&a.dataUrl).forEach(att=>{
+            const img=document.createElement("img"); img.className="img-preview"; img.src=att.dataUrl; img.alt=att.name;
+            img.style.marginLeft="22px";
+            img.onclick=()=>{ document.getElementById("modalImg").src=att.dataUrl; document.getElementById("imgModal").classList.add("open"); };
+            block.appendChild(img);
+          });
+        }
+
+        // Panel d'attachement (inline)
+        const panel=document.createElement("div"); panel.className="attach-panel"+(openPanels[panelKey]?" open":"");
+        
+        // Lien
+        const lr=document.createElement("div"); lr.className="attach-panel-row";
+        const linp=document.createElement("input"); linp.className="attach-link-input"; linp.type="text"; linp.placeholder="Coller un lien (SharePoint, URL...)";
+        const ladd=mkBtn("Ajouter","sm",()=>{
+          const url=linp.value.trim(); if(!url)return;
+          const label=url.replace(/^https?:\/\/(www\.)?/,"").split("/").slice(0,2).join("/");
+          n.attachments.push({type:"link",url,label});
+          linp.value=""; autoSave(); render();
+        });
+        linp.onkeydown=e=>{if(e.key==="Enter")ladd.click();};
+        lr.appendChild(linp); lr.appendChild(ladd);
+        panel.appendChild(lr);
+
+        // Fichier / image
+        const dz=document.createElement("div"); dz.className="attach-drop";
+        dz.textContent="📤 Déposer un fichier ou une capture d'écran ici";
+        const fi=document.createElement("input"); fi.type="file"; fi.multiple=true; fi.accept="image/*,.pdf,.xlsx,.xls,.docx,.doc,.csv"; fi.style.display="none";
+        fi.onchange=e=>handleAttach(e.target.files,n);
+        dz.onclick=()=>fi.click();
+        dz.ondragover=e=>{e.preventDefault();dz.classList.add("over");};
+        dz.ondragleave=()=>dz.classList.remove("over");
+        dz.ondrop=e=>{e.preventDefault();dz.classList.remove("over");handleAttach(e.dataTransfer.files,n);};
+        panel.appendChild(fi); panel.appendChild(dz);
+        block.appendChild(panel);
+
+        body.appendChild(block);
+      });
+
+      // Ajouter notion
+      const addN=document.createElement("button"); addN.className="add-notion-btn"; addN.textContent="+ Ajouter une notion";
+      addN.onclick=()=>{sec.notions.push({id:state.nni++,text:"",attachments:[]});autoSave();render();};
       body.appendChild(addN);
-
-      // Séparateur
-      const hr = document.createElement("hr");
-      hr.className = "divider";
-      body.appendChild(hr);
-
-      // Fichiers & liens
-      const al = document.createElement("div");
-      al.className = "attach-label";
-      al.innerHTML = "📎 Fichiers & liens";
-      body.appendChild(al);
-
-      // Drop zone
-      const dz = document.createElement("div");
-      dz.className = "drop-zone";
-      dz.setAttribute("role","button");
-      dz.setAttribute("aria-label","Déposer un fichier");
-      dz.innerHTML = '<div class="drop-label">📤 Déposer un fichier ici ou <u>cliquer pour sélectionner</u></div>';
-      const fi = document.createElement("input");
-      fi.type="file"; fi.multiple=true; fi.style.display="none";
-      fi.onchange = e => handleFiles(e.target.files, sec);
-      body.appendChild(fi);
-      dz.onclick = ()=> fi.click();
-      dz.ondragover = e=>{ e.preventDefault(); dz.classList.add("over"); };
-      dz.ondragleave = ()=> dz.classList.remove("over");
-      dz.ondrop = e=>{ e.preventDefault(); dz.classList.remove("over"); handleFiles(e.dataTransfer.files,sec); };
-      body.appendChild(dz);
-
-      // Liste fichiers
-      const fl = document.createElement("div");
-      fl.className = "file-list";
-      (sec.files||[]).forEach((f,fi2)=>{
-        const item=document.createElement("div"); item.className="file-item";
-        const ic=document.createElement("span"); ic.className="file-icon"; ic.textContent=iconFor(f.name);
-        const nm=document.createElement("span"); nm.className="file-name"; nm.title=f.name; nm.textContent=f.name;
-        const sz=document.createElement("span"); sz.className="file-size"; sz.textContent=fmtSize(f.size);
-        const d=document.createElement("button"); d.className="file-del"; d.textContent="✕"; d.setAttribute("aria-label","Supprimer fichier");
-        d.onclick=()=>{ sec.files.splice(fi2,1); autoSave(); render(); };
-        item.appendChild(ic); item.appendChild(nm); item.appendChild(sz); item.appendChild(d);
-        fl.appendChild(item);
-      });
-      body.appendChild(fl);
-
-      // Lien
-      const lr = document.createElement("div");
-      lr.className = "link-row";
-      const linp = document.createElement("input");
-      linp.type="text"; linp.className="link-input";
-      linp.value = linkInputs[sec.id]||"";
-      linp.placeholder = "Coller un lien SharePoint ou URL puis Entrée...";
-      linp.oninput = e=>{ linkInputs[sec.id]=e.target.value; };
-      linp.onkeydown = e=>{ if(e.key==="Enter") addLink(sec); };
-      const ladd=mkBtn("Ajouter","",()=>addLink(sec));
-      lr.appendChild(linp); lr.appendChild(ladd);
-      body.appendChild(lr);
-
-      (sec.links||[]).forEach((lk,li)=>{
-        const item=document.createElement("div"); item.className="link-item";
-        const ic=document.createElement("span"); ic.textContent="🔗"; ic.style.flexShrink=0;
-        const a=document.createElement("a"); a.href=lk.url; a.target="_blank"; a.rel="noopener";
-        a.textContent=lk.label||lk.url;
-        const d=document.createElement("button"); d.className="link-del"; d.textContent="✕"; d.setAttribute("aria-label","Supprimer lien");
-        d.onclick=()=>{ sec.links.splice(li,1); autoSave(); render(); };
-        item.appendChild(ic); item.appendChild(a); item.appendChild(d);
-        body.appendChild(item);
-      });
-
       card.appendChild(body);
     }
     root.appendChild(card);
   });
 }
 
-function addLink(sec) {
-  const url = (linkInputs[sec.id]||"").trim();
-  if(!url) return;
-  const label = url.replace(/^https?:\/\/(www\.)?/,"").split("/").slice(0,3).join("/");
-  if(!sec.links) sec.links=[];
-  sec.links.push({url,label});
-  linkInputs[sec.id]="";
-  autoSave(); render();
+function handleAttach(files, n){
+  Array.from(files).forEach(f=>{
+    if(/\.(png|jpg|jpeg|gif|webp)$/i.test(f.name)){
+      const reader=new FileReader();
+      reader.onload=e=>{
+        n.attachments.push({type:"image",name:f.name,size:f.size,dataUrl:e.target.result});
+        autoSave(); render();
+      };
+      reader.readAsDataURL(f);
+    } else {
+      n.attachments.push({type:"file",name:f.name,size:f.size});
+      autoSave(); render();
+    }
+  });
+  setStatus("✓ Fichier attaché à la notion");
 }
 
-function handleFiles(files, sec) {
-  if(!sec.files) sec.files=[];
-  Array.from(files).forEach(f=>{ sec.files.push({name:f.name,size:f.size,type:f.type}); });
+window.addSection=function(){
+  if(!state)return;
+  state.sections.push({id:state.nsi++,title:"Nouvelle section",desc:"",open:true,notions:[{id:state.nni++,text:"",attachments:[]}]});
   autoSave(); render();
-  setStatus("✓ Fichier(s) ajouté(s)");
-}
-
-window.addSection = function() {
-  if(!state) return;
-  state.sections.push({id:state.nsi++,title:"Nouvelle section",desc:"",open:true,notions:[{id:state.nni++,text:""}],files:[],links:[]});
-  autoSave(); render();
-  setTimeout(()=>{ const ins=document.querySelectorAll(".sec-title-input"); if(ins.length) ins[ins.length-1].focus(); },50);
 };
 
-function mkBtn(label,cls,fn,aria) {
-  const b=document.createElement("button");
-  b.className="btn "+(cls||"");
-  b.textContent=label;
-  if(aria) b.setAttribute("aria-label",aria);
-  b.onclick=fn; return b;
-}
-
-function autoGrow(el) {
-  el.style.height="auto";
-  el.style.height=el.scrollHeight+"px";
-}
+function grow(el){el.style.height="auto";el.style.height=el.scrollHeight+"px";}
 </script>
 </body>
 </html>
